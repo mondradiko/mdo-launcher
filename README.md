@@ -16,4 +16,4 @@
 - ReactJS
 - Electron
 - [Moon](https://moonjs.org/)?
-- which database library?
+- Firebase?
