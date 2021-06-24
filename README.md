@@ -1,8 +1,8 @@
 # mdo-launcher
 
-# Requirements
+# Requirements/TODO
 - server list
-- node.js native plugin for hosting `mdo-core`
+- node.js native plugin for hosting `mdo-core` (N-API)
 - log capturing
 - core updates
 - cvar configuration
@@ -13,8 +13,7 @@
 
 # Tools
 - node.js
+- ReactJS
 - Electron
-- Vue + Vuetify?
-- React?
 - [Moon](https://moonjs.org/)?
 - which database library?
