@@ -1,6 +1,7 @@
 # mdo-launcher
 
 # Requirements/TODO
+
 - server list
 - node.js native plugin for hosting `mdo-core` (N-API)
 - log capturing
@@ -12,6 +13,7 @@
 - "hub" server for server discovery?
 
 # Tools
+
 - node.js
 - ReactJS
 - Electron
