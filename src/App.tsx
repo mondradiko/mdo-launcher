@@ -28,6 +28,48 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import SimCardIcon from '@material-ui/icons/SimCard';
 
 import { createClient } from '@supabase/supabase-js';
+//XrStructureType;
+//XrInstanceCreateFlags;
+//XrApplicationInfo;
+
+const XR_USE_GRAPHICS_API_OPENGL = "OpenGL"
+const XR_USE_GRAPHICS_API_OPENGL_ES = "OpenGL ES"
+
+const XR_USE_GRAPHICS_API_VULKAN = "Vulkan"
+
+//D3D10 DEPRECATED (OpenXR 1.0)
+const XR_USE_GRAPHICS_API_D3D11 = "Direct3D 11"
+const XR_USE_GRAPHICS_API_D3D12 = "Direct3D 12"
+
+//Window System Header Control
+//Compile Time Symbol	Window System Name
+const XR_USE_PLATFORM_WIN32 = "Microsoft Windows";
+const XR_USE_PLATFORM_XLIB = "X Window System Xlib"
+const XR_USE_PLATFORM_XCB = "X Window System Xcb"
+const XR_USE_PLATFORM_WAYLAND = "Wayland"
+
+const XR_USE_PLATFORM_ANDROID = "Android Native"
+//XR_USE_PLATFORM_ARKIT = "ARKit"?
+
+//Actual 1-to-1 function that can be passed to WASM or Mondradiko
+type XrInstanceCreateInfo = {
+      type: any;
+      next: null;
+      createFlags: any;
+      applicationInfo: any;
+      enabledApiLayerCount: number;
+      enabledApiLayerNames: number;
+      enabledExtensionCount: number;
+      enabledExtensionNames: number;
+} 
+
+//an Assertable Query which Mondradiko/WASM can parse for Display Data
+type OpenXRConfig = {
+  user_id: string;
+  channel_id: number;
+  displayType: string;
+  cvars: { graphicsAPI: string };
+}
 
 export default function App() {
 const [session, setSession] = useState(null)
@@ -63,7 +105,6 @@ const StyledListItem = withStyles({
 })(ListItem);
 
 let REACT_APP_NEXT_PUBLIC_SUPABASE_URL = "https://nxsdswlefppxbctvsjpn.supabase.co";
-//not actually secret
 let REACT_APP_SUPABASE_SECRET_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyNDU4NTE1OCwiZXhwIjoxOTQwMTYxMTU4fQ.LX3N311P4eDPFXcgJCzF6j9qDYt3u3ArNLRBmmaYny0";
 
 //RIP dotenv
@@ -75,6 +116,13 @@ const supabase = createClient(
   REACT_APP_NEXT_PUBLIC_SUPABASE_URL,
   REACT_APP_SUPABASE_SECRET_KEY
 );
+
+const xrResponse = await OpenXR
+  .from<OpenXRConfig>('displays') // Message maps to the type of the row in your database.
+  .select('*, cvars:graphicsAPI(username)')
+  .match({ channel_id: 0 }) // Your IDE will be able to help with auto-completion.
+xrResponse.data // Response data will be of type Array<Message>.
+
 
 useEffect(() => {
   setSession(supabase.auth.session())
