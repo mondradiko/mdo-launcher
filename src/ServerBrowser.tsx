@@ -4,7 +4,6 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  withStyles,
 } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,9 +18,11 @@ import StarBorder from '@material-ui/icons/StarBorder';
 
 import DnsIcon from '@material-ui/icons/Dns';
 
+import ServerListItem from './ServerListItem';
+
 export default function ServerBrowser(props: any) {
   const { name } = props;
-  
+
   return (
     <div>
     <p>
@@ -36,6 +37,7 @@ export default function ServerBrowser(props: any) {
       </ListSubheader>
     }
   >
+    <ServerListItem name="test-server-launcher" />
     <ListItem button>
       <ListItemIcon>
         <DnsIcon />
